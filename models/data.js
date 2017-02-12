@@ -33,7 +33,7 @@ let messageSchema = new Schema({
     collection: 'messages'
 });
 
-mongoose.connect('mongodb://localhost/chatroomdb');
+mongoose.connect('mongodb://ajax:drrr@ds151059.mlab.com:51059/drrr-chatroom');
 
 let schema = {
     'User': mongoose.model('User', userSchema),
