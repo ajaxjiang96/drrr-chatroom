@@ -30,6 +30,7 @@ div::-webkit-scrollbar {
 
 .name-text {
     width: 50px;
+    font-size: 12px;
     margin-top: 2px;
     text-align:center;
     align-items: center;
