@@ -1,0 +1,21 @@
+{
+  "name": "chat_server",
+  "version": "1.0.0",
+  "description": "An example chat server for students",
+  "main": "chatserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.22",
+    "mongoose": "^4.8.2",
+    "nodemon": "^1.11.0",
+    "nunjucks": "^3.0.0"
+  }
+}

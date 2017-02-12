@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <title>Chat Example</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="scripts/script.js"></script>
+</head>
+
+<body>
+
+
+
+
+<div id="wrapper">
+
+    <div id="menu">
+        <form id="name-form">
+          <p>Enter a nick name</p>
+          <input type="text" name="user-name" id="user-name" />
+          <input type="button" name="post-name" id="post-name" value="Enter" />
+      </form>
+        <p class="welcome" style="display:none">Welcome, <b><span class="name"></span></b></p>
+        <input type="button" class="logout" name="pause" id="pause" value="Stop Updates" />
+        <input type="button" class="logout" name="logout" id="logout" value="Forget me" />
+        <div style="clear:both"></div>
+
+
+    <div id="chatbox"></div>
+
+    <form id="msgform" name="message" action="" style="display:none">
+        <input name="usermsg" type="text" id="usermsg" size="63"/>
+        <button>POST!</button>
+    </form>
+        </div>
+</div>
+
+</body>
