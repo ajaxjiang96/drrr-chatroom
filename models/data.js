@@ -5,7 +5,8 @@ let Schema = mongoose.Schema;
 let userSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     color: {
         type: String,
@@ -13,7 +14,6 @@ let userSchema = new Schema({
     },
     messages: {
         type: [String],
-        required: true,
         default: []
     },
 }, {
@@ -28,7 +28,11 @@ let messageSchema = new Schema({
     from: {
         type: String,
         required: true
-    }
+    },
+    color: {
+        type: String,
+        required: true
+    },
 }, {
     collection: 'messages'
 });

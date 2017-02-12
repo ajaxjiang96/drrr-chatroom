@@ -1,6 +1,6 @@
 /* CSS Document */
 body {
-    font:12px arial;
+    font:16px arial;
     color: #fff;
     text-align:center;
     padding:35px;
@@ -10,7 +10,9 @@ body {
 div {
     /*border: 1px solid #000*/
 }
-
+div::-webkit-scrollbar {
+    display: none;
+}
 #name-form {}
 .msg {
     display: flex;
@@ -28,18 +30,33 @@ div {
 
 .name-text {
     width: 50px;
+    margin-top: 2px;
     text-align:center;
     align-items: center;
     align-self: center;
 }
-
+.text-wrapper {
+    padding-top:10px;
+    padding-bottom: auto;
+    max-width: 350px;
+}
 .text {
-    display: flex;
+    /*display: clock;*/
     /*width: 80%;*/
     padding:12px;
-    background-color: #a00;
+    /*background-color: #a00;*/
     border-radius: 10px;
     border:2px solid #fff;
+    max-width: 350px;
+    background: rgba(0,0,0,0);
+background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.47) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(50%, rgba(0,0,0,0)), color-stop(100%, rgba(0,0,0,0.47)));
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.47) 100%);
+background: -o-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.47) 100%);
+background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.47) 100%);
+background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.47) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=0 );
+word-break: break-all;
 }
 form, p, span {
     margin:0;
@@ -48,7 +65,7 @@ form, p, span {
 input {
     color: #fff;
     width: 100%;
-    font:12px arial;
+    font:16px arial;
     background-color: #000;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -60,16 +77,22 @@ input[type="button"]:active {
     color: #000;
     background-color: #fff;
 }
+input[type="text"] {
+    width: 430px;
+}
 
 input:focus {
     outline: none;
 }
 button{
-    font-size: 20px;
+    font-size: 16px;
     background-color: #333;
     border: 2px solid #fff;
+    border-radius: 8px;
     color:white;
     width: 100%;
+    padding:10px;
+    margin-bottom: 10px;
 }
 
 button:active{
@@ -102,15 +125,17 @@ a {
     margin-bottom:25px;
     padding:10px;
     background:#000;
-    height:270px;
+    height:430px;
     width:430px;
     border-radius: 10px;
     border:2px solid #fff;
-    overflow:auto; }
+    overflow:auto;
+overflow-x: hidden;}
 
 #usermsg {
-    width:395px;
-    border:1px solid #ACD8F0; }
+    /*width:395px;*/
+    /*border:1px solid #ACD8F0; */
+}
 
 #submit { width: 60px; }
 
@@ -118,8 +143,105 @@ a {
 
 #menu { padding:12.5px 25px 12.5px 25px; }
 
-.welcome { float:left; }
-
+.welcome { float:left; margin-bottom: 10px;}
+.welcome-wrapper {
+    display: inline-block;
+    width: 300px;
+}
 .logout { float:right; }
 
 .msgln { margin:0 0 2px 0; }
+
+/* Mobile */
+@media screen and (max-width: 736px) {
+
+    body {
+        padding:2px;
+        margin: 0;
+        background-size: auto 100%;
+    }
+    #wrapper, #loginform {
+        width: 95%
+    }
+    input {
+        width: 45.5%;
+        margin-right: 10px;
+    }
+    #menu {
+        padding:5px;
+    }
+    input[type="text"] {
+        margin-right: 0;
+        width: 90%;
+    }
+    .photo {
+        height: 35px;
+        width: 35px;
+        border-radius: 5px;
+        border: 2px solid #fff;
+    }
+    .name-text {
+        width: 35px;
+        margin-top: 2px;
+        text-align:center;
+        align-items: center;
+        align-self: center;
+    }
+    /*.text {
+        width: 90%;
+    }*/
+    #chatbox {
+        width: 90%;
+        padding:5px;
+        height: 350px;
+    }
+    button{
+        width: 100%;
+    }
+
+}
+
+/* Mobile (Portrait) */
+@media screen and (max-width: 374px) {
+    body {
+        background-size: auto 100%;
+    }
+    #wrapper, #loginform {
+        width: 95%
+    }
+    input {
+        width: 45.5%;
+        margin-right: 10px;
+    }
+    #menu {
+        padding:5px;
+    }
+    input[type="text"] {
+        margin-right: 0;
+        width: 90%;
+    }
+    .photo {
+        height: 35px;
+        width: 35px;
+        border-radius: 5px;
+        border: 2px solid #fff;
+    }
+    .name-text {
+        width: 35px;
+        margin-top: 2px;
+        text-align:center;
+        align-items: center;
+        align-self: center;
+    }
+    /*.text {
+        width: 90%;
+    }*/
+    #chatbox {
+        width: 90%;
+        padding:5px;
+        height: 270px;
+    }
+    button{
+        width: 100%;
+    }
+}

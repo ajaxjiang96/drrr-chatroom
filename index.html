@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <head>
-    <title>Chat Example</title>
+    <title>DRRR</title>
     <link type="text/css" rel="stylesheet" href="css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="scripts/script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
 </head>
 
 <body>
@@ -16,19 +18,21 @@
     <div id="menu">
         <form id="name-form">
           <p>Enter a nick name</p>
-          <input type="text" name="user-name" id="user-name" />
-          <input type="button" name="post-name" id="post-name" value="Enter" />
-      </form>
-        <p class="welcome" style="display:none">Welcome, <b><span class="name"></span></b></p>
-        <input type="button" class="logout" name="pause" id="pause" value="Stop Updates" />
-        <input type="button" class="logout" name="logout" id="logout" value="Forget me" />
+          <input type="text" name="user-name" id="user-name" autocomplete="off"/>
+          <button>Enter</button>
+        </form>
+        <div class="welcome-wrapper">
+            <p class="welcome" style="display:none">Welcome, <b><span class="name"></span></b></p>
+        </div>
+        <input type="button" class="logout" name="pause" id="pause" value="Pause" />
+        <input type="button" class="logout" name="logout" id="logout" value="Log out" />
         <div style="clear:both"></div>
 
 
     <div id="chatbox"></div>
 
     <form id="msgform" name="message" action="" style="display:none">
-        <input name="usermsg" type="text" id="usermsg" size="63"/>
+        <input name="usermsg" type="text" id="usermsg" size="63" autocomplete="off">
         <button>POST!</button>
     </form>
         </div>

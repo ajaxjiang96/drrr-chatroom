@@ -9,7 +9,10 @@ var db = require('./models/data')
 var app = express();
 app.use(express.static(__dirname + '/assets'));
 app.use(express.static(__dirname + '/'));
-nunjucks.configure('views', {autoescape: true, express: app});
+nunjucks.configure('views', {
+    autoescape: true,
+    express: app
+});
 
 
 // Set up to use a session
@@ -28,7 +31,16 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 // An array to store chat messages.  We will only store messages
 // as long as the server is running.
 var msgs = [];
-
+const colors = {
+    '1': '#EF9A9A',
+    '2': '#F8BBD0',
+    '3': '#CE93D8',
+    '4': '#D1C4E9',
+    '5': '#9FA8DA',
+    '6': '#80DEEA',
+    '7': '#A5D6A7',
+    '8': '#DCE775'
+};
 // Returns a JSON object with one key/value pair.  The key is "name"
 // and the value is the empty string if "name" is undefined in the
 // session, or the value of the name field in the session object.
@@ -40,22 +52,55 @@ function getName(req, res) {
         });
     } else {
         return res.json({
-            name: req.body.name
+            name: req.body.name,
+            user: req.user
         });
     }
 }
 
 // Add the username to the session
 function setName(req, res) {
+    console.log("setName ");
+    console.log(req.body);
     if (!req.body.hasOwnProperty('name')) {
         res.statusCode = 400;
         return res.json({
             error: 'Invalid message'
         });
     } else {
-        req.session.name = req.body.name;
-        return res.json({
-            name: req.body.name
+        db.User.findOne({
+            username: req.body.name
+        }, function(err, user) {
+            if (err) throw err;
+            if (user) {
+                // return res.json({
+                //     name: user.name,
+                //     color: user.color,
+                //     user: user
+                // });
+                console.log(user);
+                return res.send({
+                    name: user.name,
+                    user: user
+                })
+            } else {
+                user = new db.User({
+                    username: req.body.name,
+                    color: colors[Math.floor((Math.random() * 8) + 1)]
+                })
+                user.save(function(err) {
+                    if (err) throw err;
+                    // return res.json({
+                    //     name: user.name,
+                    //     color: user.color,
+                    //     user: user
+                    // });
+                    return res.send({
+                        name: user.name,
+                        user: user
+                    })
+                });
+            }
         });
     }
 }
@@ -69,16 +114,25 @@ function logout(req, res) {
 // Get a message from a user
 function addMessage(req, res) {
     // We find the message using the "text" key in the JSON object
-    var msg = new db.Message(req.body);
-    msg.save()
-    console.log(msg);
-    msgs.push(msg);
-    res.send('Success');
-}
+    db.User.findOne({
+            username: req.body.from
+        }, function(err, user) {
+            if (err) throw err;
+            console.log(user);
+            if (user) {
+                req.body.color = user.color;
+                console.log(req.body);
+                var msg = new db.Message(req.body);
+                msg.save()
+                msgs.push(msg);
+                res.send('Success');
+            }
+        });
+    }
+
 
 // Get the full list of messages
 function getMessages(req, res) {
-    // console.log(msgs);
     res.send(JSON.stringify(msgs));
 }
 

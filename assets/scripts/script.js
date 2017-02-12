@@ -27,8 +27,9 @@ $(document).ready(function() {
                 "name": name
             }),
             success: function(response) {
-                var name = response['name'];
-
+                console.log(response)
+                var name = response.user.username;
+                console.log(name)
                 updateUI(name);
             }
         });
@@ -54,6 +55,7 @@ $(document).ready(function() {
         var message = $('#usermsg').val();
         console.log(message);
         $("#usermsg").val("");
+        $('#chatbox').animate({scrollBottom: $('#chatbox').height()}, 1000);
 
         $.ajax({
             url: "/addmsg",
@@ -65,7 +67,9 @@ $(document).ready(function() {
                 from: name
             }),
             success: function(response) {
+
                 buildMessages();
+
                 console.log("send success")
             }
         });
@@ -87,7 +91,6 @@ $(document).ready(function() {
                 var name = response['name'];
                 if (response['name']) {
                     console.log("name");
-                    $('.disable').removeAttr("disabled");
                 }
                 updateUI(name);
             }
@@ -111,8 +114,8 @@ $(document).ready(function() {
                 "name": name
             }),
             success: function(response) {
-                var name = response['name'];
-
+                console.log(response)
+                var name = response.user.name;
                 updateUI(name);
             }
         });
@@ -132,6 +135,7 @@ $(document).ready(function() {
         if (name !== '') {
             $("#name-form").hide();
             $("#msgform").show();
+            $(".welcome").show();
         } else {
             $("#name-form").show();
             $("#msgform").hide();
@@ -147,16 +151,31 @@ $(document).ready(function() {
             // console.log(diff);
             let messages = JSON.parse(data);
             for (let i = 0; i < messages.length; i++) {
+                let msgwrapper = $('<div>').css("display", "block");
                 let tmp = $('<div>').addClass("msg");
                 let profile = $('<div>').addClass("profile");
-                let photo = $('<div>').addClass("photo");
+                let photo = $('<div>').addClass("photo").css("background-color", messages[i].color);
                 let name = $('<div>').addClass("name-text").text(messages[i].from);
-                let message = $('<div>').text(messages[i].text).addClass("text");
+                let messageWrapper = $('<div>').addClass("text-wrapper");
+                let message = $('<p>').text(messages[i].text).addClass("text");
+                messageWrapper.append(message);
+                console.log(data)
+                message.css("background-color", messages[i].color);
                 profile.append(photo);
                 profile.append(name);
-                tmp.append(profile);
-                tmp.append(message);
-                parent.append(tmp);
+
+                // if (messages[i].from == $(".name").text()) {
+                //     tmp.css("margin-right", "0");
+                //     // tmp.addClass("right");
+                //     // tmp.css("display", "block");
+                //     tmp.append(messageWrapper);
+                //     tmp.append(profile);
+                // } else {
+                    tmp.append(profile);
+                    tmp.append(messageWrapper);
+                // }
+                msgwrapper.append(tmp);
+                parent.append(msgwrapper);
                 // parent.animate({scrollTop: parent.height()}, 1000);
             }
         });
